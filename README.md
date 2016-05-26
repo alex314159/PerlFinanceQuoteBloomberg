@@ -12,3 +12,5 @@ As an example the following should work at the command line if all is installed 
     gnc-fq-dump bloomberg 1938:HK
 
 Within GnuCash, in the security editor, select Get Online Quotes and then Other, Bloomberg should be an option.
+
+Note that given both GnuCash and Bloomberg use the ":" character as a delimiter, it is advisable to change the default delimiter in GnuCash to some other character such as "/" (in the GnuCash preferences).
