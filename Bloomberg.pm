@@ -43,10 +43,10 @@ sub bloomberg {
     }
 
     my $tree = HTML::TreeBuilder->new_from_content($reply->content);
-    my @price_array = $tree -> look_down(_tag=>'div',class=>'price');
-    my $price = @price_array[0]->as_text =~ s/,//r;
-    my @curr_array = $tree -> look_down(_tag=>'div',class=>'currency');
-    my $curr = @curr_array[0]->as_text;
+    my @price_array = $tree -> look_down(_tag=>'meta','itemprop'=>'price');
+    my $price = @price_array[0]->attr('content');
+    my @curr_array = $tree -> look_down(_tag=>'meta','itemprop'=>'priceCurrency');
+    my $curr = @curr_array[0]->attr('content');
     #print $price;
     #print $name;
 
