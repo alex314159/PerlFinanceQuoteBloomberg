@@ -47,8 +47,6 @@ sub bloomberg {
     my $price = @price_array[0]->as_text =~ s/,//r;
     my @curr_array = $tree -> look_down(_tag=>'div',class=>'currency');
     my $curr = @curr_array[0]->as_text;
-    my @date_array = $tree -> look_down(_tag=>'div',class=>'price-datetime');
-    my $date = @date_array[0]->as_text;
     #print $price;
     #print $name;
 
