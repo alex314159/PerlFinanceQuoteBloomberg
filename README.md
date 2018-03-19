@@ -14,3 +14,6 @@ As an example the following should work at the command line if all is installed 
 Within GnuCash, in the security editor, select Get Online Quotes and then Other, Bloomberg should be an option.
 
 Note that given both GnuCash and Bloomberg use the ":" character as a delimiter, it is advisable to change the default delimiter in GnuCash to some other character such as "/" (in the GnuCash preferences).
+
+Finally, this bug and solution have been reported on Windows 10:
+http://gnucash.1415818.n4.nabble.com/Re-No-stock-quote-for-LU1233758587-td4693298.html#none
