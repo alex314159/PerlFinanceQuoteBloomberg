@@ -47,6 +47,8 @@ sub bloomberg {
     my $price = @price_array[0]->attr('content');
     my @curr_array = $tree -> look_down(_tag=>'meta','itemprop'=>'priceCurrency');
     my $curr = @curr_array[0]->attr('content');
+    my @date_array = $tree -> look_down(_tag=>'meta','itemprop'=>'quoteTime');
+    my $date = @date_array[0]->attr('content');
     #print $price;
     #print $name;
 
@@ -56,13 +58,12 @@ sub bloomberg {
     $funds{$name, 'currency'} = $curr;
     $funds{$name, 'success'}  = 1;
     $funds{$name, 'symbol'}  = $name;
+    $quoter->store_date(\%funds, $name, {isodate => substr($date,0,10)});
     $funds{$name, 'source'}   = 'Finance::Quote::Bloomberg';
     $funds{$name, 'name'}   = $name;
     $funds{$name, 'p_change'} = "";  # p_change is not retrieved (yet?)
     }
 
-    #will default to today
-    $quoter->store_date(\%funds, $name);
 
     # Check for undefined symbols
     foreach my $symbol (@symbols) {
