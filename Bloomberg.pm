@@ -31,9 +31,11 @@ sub bloomberg {
     $name = $symbol;
     $url = $BLOOMBERG_URL;
     $url = $url . $name;
-    $ua    = $quoter->user_agent;
+    # $ua    = $quoter->user_agent;
+    $ua = LWP::UserAgent->new;
+    $ua->agent("Mozilla/8.0");
     $reply = $ua->request(GET $url);
-    #print $reply->content;
+    # print $reply->content;
     unless ($reply->is_success) {
 	  foreach my $symbol (@symbols) {
         $funds{$symbol, "success"}  = 0;
