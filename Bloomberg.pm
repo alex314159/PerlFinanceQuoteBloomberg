@@ -52,14 +52,15 @@ sub bloomberg {
     }
 
     my $tree = HTML::TreeBuilder->new_from_content($reply->content);
-    my @price_array = $tree -> look_down(_tag=>'meta','itemprop'=>'price');
-    my $price = @price_array[0]->attr('content');
-    my @curr_array = $tree -> look_down(_tag=>'meta','itemprop'=>'priceCurrency');
-    my $curr = @curr_array[0]->attr('content');
-    my @date_array = $tree -> look_down(_tag=>'meta','itemprop'=>'quoteTime');
-    my $date = @date_array[0]->attr('content');
+    my @price_array = $tree -> look_down(_tag=>'span','class'=>'priceText__1853e8a5');
+    my $price = @price_array[0]->as_text();#->attr('content');
+    my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__defc7184');
+    my $curr = @curr_array[0]->as_text();#->attr('content');
+    my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__cbd9bff9');
+    my $date = substr(@date_array[0]->as_text(), 6, 10);#->attr('content');
     #print $price;
-    #print $name;
+    #print $curr;
+    # print $date
 
 
     $funds{$name, 'method'}   = 'bloomberg';
@@ -67,7 +68,7 @@ sub bloomberg {
     $funds{$name, 'currency'} = $curr;
     $funds{$name, 'success'}  = 1;
     $funds{$name, 'symbol'}  = $name;
-    $quoter->store_date(\%funds, $name, {isodate => substr($date,0,10)});
+    # $quoter->store_date(\%funds, $name, {isodate => $date});
     $funds{$name, 'source'}   = 'Finance::Quote::Bloomberg';
     $funds{$name, 'name'}   = $name;
     $funds{$name, 'p_change'} = "";  # p_change is not retrieved (yet?)
