@@ -9,7 +9,7 @@ use LWP::UserAgent;
 use HTTP::Request::Common;
 use HTML::TreeBuilder;
 
-$VERSION = '0.1';
+$VERSION = '0.2';
 $BLOOMBERG_URL = 'https://www.bloomberg.com/quote/';
 
 sub methods { return (bloomberg => \&bloomberg); }
@@ -44,10 +44,10 @@ sub bloomberg {
     # below used for debugging    
     # print $reply->content;
     unless ($reply->is_success) {
-	  foreach my $symbol (@symbols) {
+      foreach my $symbol (@symbols) {
         $funds{$symbol, "success"}  = 0;
         $funds{$symbol, "errormsg"} = "HTTP failure";
-	  }
+      }
 	  return wantarray ? %funds : \%funds;
     }
 
@@ -57,10 +57,10 @@ sub bloomberg {
     my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__defc7184');
     my $curr = @curr_array[0]->as_text();#->attr('content');
     my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__cbd9bff9');
-    my $date = substr(@date_array[0]->as_text(), 6, 10);#->attr('content');
-    #print $price;
-    #print $curr;
-    # print $date
+    my $date = @date_array[0]->as_text();#attr('content');
+    # print $price;
+    # print $curr;
+    # print $date;
 
 
     $funds{$name, 'method'}   = 'bloomberg';
@@ -68,7 +68,10 @@ sub bloomberg {
     $funds{$name, 'currency'} = $curr;
     $funds{$name, 'success'}  = 1;
     $funds{$name, 'symbol'}  = $name;
-    # $quoter->store_date(\%funds, $name, {isodate => $date});
+    # US date format (mm/dd/yyyy) as defined in Quote.pm
+    # Read the string from the end, because for Stocks it adds time at the
+    # begining; but for mutual funds, not.
+    $quoter->store_date(\%funds, $name, {usdate => substr($date,-14,10)});
     $funds{$name, 'source'}   = 'Finance::Quote::Bloomberg';
     $funds{$name, 'name'}   = $name;
     $funds{$name, 'p_change'} = "";  # p_change is not retrieved (yet?)
@@ -77,10 +80,10 @@ sub bloomberg {
 
     # Check for undefined symbols
     foreach my $symbol (@symbols) {
-	  unless ($funds{$symbol, 'success'}) {
-        $funds{$symbol, "success"}  = 0;
-        $funds{$symbol, "errormsg"} = "Fund name not found";
-	  }
+      unless ($funds{$symbol, 'success'}) {
+          $funds{$symbol, "success"}  = 0;
+          $funds{$symbol, "errormsg"} = "Fund name not found";
+      }
     }
 
   return %funds if wantarray;
