@@ -34,11 +34,11 @@ sub bloomberg {
     # $ua    = $quoter->user_agent;
     $ua = LWP::UserAgent->new;
     my @ns_headers = (
-      'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 
-      'referrer' => 'https://www.google.com',
+      'User-Agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/14.1.119979954 Mobile/13E238 Safari/600.1.4', 
+      'Referer' => 'https://www.bing.com',
       'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
       #'Accept-Encoding' => 'gzip, deflate, br', 
-      'Accept-Language' => 'en-US,en;q=0.9',
+      'Accept-Language' => 'en-US,en;q=0.9,fr;q=0.8',
       'Pragma' => 'no-cache', );
     $reply = $ua->get($url, @ns_headers);
     # below used for debugging    
@@ -56,7 +56,7 @@ sub bloomberg {
     my $price = @price_array[0]->as_text();#->attr('content');
     my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__defc7184');
     my $curr = @curr_array[0]->as_text();#->attr('content');
-    my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__cbd9bff9');
+    my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__94e24743');
     my $date = @date_array[0]->as_text();#attr('content');
     # print $price;
     # print $curr;
