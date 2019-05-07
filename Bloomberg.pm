@@ -56,8 +56,8 @@ sub bloomberg {
     my $price = @price_array[0]->as_text();#->attr('content');
     my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__defc7184');
     my $curr = @curr_array[0]->as_text();#->attr('content');
-    my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__94e24743');
-    my $date = @date_array[0]->as_text();#attr('content');
+    # my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__94e24743');
+    # my $date = @date_array[0]->as_text();#attr('content');
     # print $price;
     # print $curr;
     # print $date;
@@ -71,7 +71,7 @@ sub bloomberg {
     # US date format (mm/dd/yyyy) as defined in Quote.pm
     # Read the string from the end, because for Stocks it adds time at the
     # begining; but for mutual funds, not.
-    $quoter->store_date(\%funds, $name, {usdate => substr($date,-14,10)});
+    # $quoter->store_date(\%funds, $name, {usdate => substr($date,-14,10)});
     $funds{$name, 'source'}   = 'Finance::Quote::Bloomberg';
     $funds{$name, 'name'}   = $name;
     $funds{$name, 'p_change'} = "";  # p_change is not retrieved (yet?)
