@@ -34,11 +34,12 @@ sub bloomberg {
     # $ua    = $quoter->user_agent;
     $ua = LWP::UserAgent->new;
     my @ns_headers = (
-      'User-Agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/14.1.119979954 Mobile/13E238 Safari/600.1.4', 
-      'Referer' => 'https://www.bing.com',
-      'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-      #'Accept-Encoding' => 'gzip, deflate, br', 
-      'Accept-Language' => 'en-US,en;q=0.9,fr;q=0.8',
+      'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0', 
+#      'User-Agent' => 'Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36', 
+      'Referer' => 'https://www.bloomberg.com/',
+      'Accept' => '*/*',
+      'Accept-Encoding' => 'br', 
+      'Accept-Language' => 'en-US,en;q=0.5',
       'Pragma' => 'no-cache', );
     $reply = $ua->get($url, @ns_headers);
     # below used for debugging    
