@@ -62,7 +62,7 @@ sub bloomberg {
     my $price = @price_array[0]->as_text();#->attr('content');
     my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__defc7184');
     my $curr = @curr_array[0]->as_text();#->attr('content');
-    my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__245ca7bb');
+    my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__245ca7bb ');
     my $date = @date_array[0]->as_text();#attr('content');
     # print $price;
     # print $curr;
