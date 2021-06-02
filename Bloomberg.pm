@@ -107,9 +107,9 @@ _pxde|e4a5b7349a3259cc2dfb017677a082a7fa27562974cf22a89103e5733a5672cc:eyJ0aW1lc
     }
 
     my $tree = HTML::TreeBuilder->new_from_content($reply->content);
-    my @price_array = $tree -> look_down(_tag=>'span','class'=>'priceText__1853e8a5');
+    my @price_array = $tree -> look_down(_tag=>'span','class'=>'priceText__06f600fa3e');
     my $price = @price_array[0]->as_text();#->attr('content');
-    my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__defc7184');
+    my @curr_array = $tree -> look_down(_tag=>'span','class'=>'currency__2081d5af46');
     my $curr = @curr_array[0]->as_text();#->attr('content');
     # my @date_array = $tree -> look_down(_tag=>'div','class'=>'time__94e24743');
     # my $date = @date_array[0]->as_text();#attr('content');
